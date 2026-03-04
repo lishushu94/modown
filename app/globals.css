@@ -1,0 +1,243 @@
+/**
+ * Modown 全局样式
+ * 基于原始 Modown WordPress 主题配色方案
+ * 使用 Tailwind CSS v4 + CSS 自定义属性
+ */
+
+@import "tailwindcss";
+
+/* ========== 自定义字体（保留原主题图标字体） ========== */
+@font-face {
+  font-family: 'flavor';
+  src: url('/static/font/c76c474cfaec1e93924bc6eef998673b91e3dc87.woff2') format('woff2'),
+       url('/static/font/1574a666ba4633923d4a0f22cf1daa04455a6079.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========== CSS 设计变量（从原始 Modown 主题提取） ========== */
+:root {
+  /* 主色调 - Modown 经典红色 */
+  --color-primary: #ff4242;
+  --color-primary-hover: #e63a3a;
+  --color-primary-light: #fff1f1;
+
+  /* 辅助色 */
+  --color-accent: #ff9800;
+  --color-accent-green: #4caf50;
+  --color-accent-blue: #2196f3;
+
+  /* 中性色 */
+  --color-bg: #f5f5f5;
+  --color-bg-white: #ffffff;
+  --color-bg-dark: #2c2c2c;
+  --color-bg-card: #ffffff;
+  --color-bg-section: #f8f8f8;
+
+  /* 文字色 */
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
+  --color-text-white: #ffffff;
+
+  /* 边框色 */
+  --color-border: #eeeeee;
+  --color-border-light: #f0f0f0;
+
+  /* 阴影 */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-dropdown: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  /* 过渡 */
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+}
+
+/* ========== 暗色模式变量（夜间模式） ========== */
+.dark {
+  --color-bg: #1a1a1a;
+  --color-bg-white: #242424;
+  --color-bg-card: #2c2c2c;
+  --color-bg-section: #1e1e1e;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #aaaaaa;
+  --color-text-muted: #777777;
+  --color-border: #383838;
+  --color-border-light: #333333;
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* ========== Tailwind v4 自定义主题 ========== */
+@theme {
+  --color-modown-primary: var(--color-primary);
+  --color-modown-primary-hover: var(--color-primary-hover);
+  --color-modown-primary-light: var(--color-primary-light);
+  --color-modown-accent: var(--color-accent);
+  --color-modown-green: var(--color-accent-green);
+  --color-modown-blue: var(--color-accent-blue);
+  --color-modown-bg: var(--color-bg);
+  --color-modown-bg-white: var(--color-bg-white);
+  --color-modown-bg-card: var(--color-bg-card);
+  --color-modown-bg-section: var(--color-bg-section);
+  --color-modown-text: var(--color-text-primary);
+  --color-modown-text-secondary: var(--color-text-secondary);
+  --color-modown-text-muted: var(--color-text-muted);
+  --color-modown-border: var(--color-border);
+  --color-modown-border-light: var(--color-border-light);
+  --font-family-icon: 'flavor', sans-serif;
+}
+
+/* ========== 全局基础样式 ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ========== 自定义滚动条 ========== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+/* ========== 活动滚动通知动画 ========== */
+@keyframes ticker-scroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker-scroll 20s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* ========== Banner 轮播动画 ========== */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease;
+}
+
+/* ========== 购买通知浮窗动画 ========== */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease;
+}
+
+/* ========== 统计数字脉冲动画 ========== */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* ========== 区块背景图叠加层 ========== */
+.section-overlay {
+  position: relative;
+}
+
+.section-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.03);
+  pointer-events: none;
+}
+
+/* ========== 隐藏滚动条但保留滚动功能 ========== */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========== 文字省略 ========== */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

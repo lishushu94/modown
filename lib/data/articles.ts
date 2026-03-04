@@ -1,0 +1,453 @@
+/**
+ * 文章数据
+ * 从原始 HTML 中提取的全部文章资源数据
+ * 按区块分组：最新发布、默认样式、自定义高度、标题模式、列表模式、教程
+ */
+
+import type { Article, ListArticle, TitleArticle, TutorialArticle } from '@/lib/types';
+
+/* ========== 最新发布 (NEW) 区块文章 ========== */
+
+/** 最新发布文章列表（首页 "最新发布 NEW" 区块） */
+export const latestArticles: Article[] = [
+  {
+    id: 1,
+    title: '演示VIP专享资源',
+    excerpt: '这是VIP专享资源，仅VIP可下载',
+    category: '未分类',
+    date: '2023-03-10',
+    views: '1.1w',
+    comments: 5,
+    price: 'VIP',
+    badges: ['VIP'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+  {
+    id: 2,
+    title: '团购资源、TAB选项卡演示',
+    excerpt: '团购资源演示，也可以同时支持团购与单独购买！团购资源演示 这是一个文章...',
+    category: '未分类',
+    date: '',
+    views: '',
+    comments: 0,
+    price: '',
+    badges: ['拼团'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+    groupBuy: { progress: 0, participants: 2 },
+  },
+  {
+    id: 3,
+    title: '演示付费下载资源样式2',
+    excerpt: '社交类 app 有着庞大的用户群，而用户就是公司开展业务和发展最重要的资源。最近像...',
+    category: '子分类1',
+    date: '2021-12-01',
+    views: '2.76w',
+    comments: 7,
+    price: 10,
+    badges: ['荐'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+  {
+    id: 4,
+    title: '测试资源下载',
+    titlePrefix: '独家',
+    excerpt: '社交类 app 有着庞大的用户群，而用户就是公司开展业务和发展最重要的资源。最近像...',
+    category: '子分类3',
+    date: '2019-03-07',
+    views: '10w+',
+    comments: 70,
+    price: 10,
+    badges: ['VIP', '荐'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+  {
+    id: 5,
+    title: '演示免登录付费下载',
+    titlePrefix: '免登录',
+    excerpt: '测试免登录付费下载，购买信息保存一天，不保存IP。后台可设置购买保存规则～～...',
+    category: '未分类',
+    date: '2019-03-07',
+    views: '2.74w',
+    comments: 24,
+    price: 0.1,
+    badges: ['VIP', '荐'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+  {
+    id: 6,
+    title: '演示收费查看文章部分内容',
+    excerpt: '这是可以免费看到的内容，这是可以免费看到的内容，这是可以免费看到的内容。...',
+    category: '未分类',
+    date: '2019-03-07',
+    views: '3.57w',
+    comments: 23,
+    price: '',
+    badges: [],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+  {
+    id: 7,
+    title: '演示多附件多价格收费下载',
+    titlePrefix: '正版',
+    excerpt: '演示多附件多价格收费下载，可用于场景例如：一个软件有多个版本，每个版本价格不...',
+    category: '未分类',
+    date: '2019-03-07',
+    views: '2.72w',
+    comments: 11,
+    price: 1,
+    badges: ['VIP'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+  {
+    id: 8,
+    title: '演示免费资源下载',
+    excerpt: '苹果本周宣布，将支持阿拉巴马州的一项反歧视法案以公司 CEO Tim Cook 为名。这一...',
+    category: 'Grid分类',
+    date: '2019-03-06',
+    views: '2.33w',
+    comments: 26,
+    price: '免费',
+    badges: ['免费'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+];
+
+/* ========== 默认样式区块文章 ========== */
+
+/** 默认样式区块文章列表（带子分类筛选功能） */
+export const defaultStyleArticles: Article[] = [
+  {
+    id: 3,
+    title: '演示付费下载资源样式2',
+    excerpt: '社交类 app 有着庞大的用户群，而用户就是公司开展业务和发展最重要的资源。最近像...',
+    category: '子分类1',
+    date: '2021-12-01',
+    views: '2.76w',
+    comments: 7,
+    price: 10,
+    badges: ['荐'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+  {
+    id: 4,
+    title: '测试资源下载',
+    titlePrefix: '独家',
+    excerpt: '社交类 app 有着庞大的用户群，而用户就是公司开展业务和发展最重要的资源。最近像...',
+    category: '子分类3',
+    date: '2019-03-07',
+    views: '10w+',
+    comments: 70,
+    price: 10,
+    badges: ['VIP', '荐'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+  {
+    id: 5,
+    title: '演示免登录付费下载',
+    titlePrefix: '免登录',
+    excerpt: '测试免登录付费下载，购买信息保存一天，不保存IP。后台可设置购买保存规则～～...',
+    category: '未分类',
+    date: '2019-03-07',
+    views: '2.74w',
+    comments: 24,
+    price: 0.1,
+    badges: ['VIP', '荐'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+  {
+    id: 8,
+    title: '演示免费资源下载',
+    excerpt: '苹果本周宣布，将支持阿拉巴马州的一项反歧视法案以公司 CEO Tim Cook 为名。这一...',
+    category: 'Grid分类',
+    date: '2019-03-06',
+    views: '2.33w',
+    comments: 26,
+    price: '免费',
+    badges: ['免费'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+  {
+    id: 9,
+    title: '演示收费观看视频，支持视频列表',
+    excerpt: '可设置单独购买观看视频、VIP免费观看视频、注册用户免费观看视频等权限。支持...',
+    category: '子分类1',
+    date: '2019-03-06',
+    views: '2.15w',
+    comments: 10,
+    price: 1,
+    badges: ['VIP'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+  {
+    id: 10,
+    title: '演示相册功能',
+    excerpt: '游客可预览几张，登录后查看全部。游客仅可查看5张，共10张登录。非VIP用...',
+    category: '子分类1',
+    date: '2019-03-05',
+    views: '1.77w',
+    comments: 15,
+    price: 'VIP',
+    badges: ['VIP'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+  {
+    id: 11,
+    title: '【团购下载】标题可设置显示最多两行',
+    excerpt: '虽然"新能源汽车"这一名词不断出现在大家的视界里，但其实这类汽车...',
+    category: 'Grid分类',
+    date: '',
+    views: '',
+    comments: 0,
+    price: '',
+    badges: ['拼团'],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+    groupBuy: { progress: 100, participants: 2 },
+  },
+  {
+    id: 12,
+    title: '测试文章幻灯片图片',
+    excerpt: '据 Recode 报道，Demand Media 的联合创始人兼 CEO Richard Rosenblatt 在靠"用户...',
+    category: 'Grid分类',
+    date: '2014-12-04',
+    views: '8.1k',
+    comments: 3,
+    price: '',
+    badges: [],
+    thumbnail: '/static/picture/4bc9cd1ef683ab8b82d019f9e13c9543dacb8fb1.png',
+  },
+];
+
+/* ========== 自定义高度区块文章 ========== */
+
+/** 自定义高度缩略图文章列表 */
+export const customHeightArticles: Article[] = [
+  {
+    id: 13,
+    title: '演示自动发卡',
+    excerpt: '每天，我们和无数的移动设备产生沟通。我们需要热咖啡，就会按下咖啡机的按钮；在...',
+    category: '自定义高度',
+    date: '2014-12-04',
+    views: '6.21k',
+    comments: 5,
+    price: 1,
+    badges: ['荐'],
+    thumbnail: '/static/picture/c6b1386e4c3576c0f11002e9d125713761d7fc7d.png',
+  },
+  {
+    id: 14,
+    title: 'mPath 告诉我们可穿戴设备应当这样做',
+    excerpt: '连线之前说以高德纳咨询公司此前所提出的"技术成熟曲线"来解释 Google Glass 这两...',
+    category: '自定义高度',
+    date: '2014-12-04',
+    views: '3.43k',
+    comments: 0,
+    price: '',
+    badges: [],
+    thumbnail: '/static/picture/7cb527c4c92498e502dcdff20b9dbb46859c3dc0.png',
+  },
+  {
+    id: 15,
+    title: 'Myris：让虹膜识别呆在你手边',
+    excerpt: '扫描虹膜，然后进入某个神秘的金库，这是电影里常常看到的画面。因为电影当中...',
+    category: '自定义高度',
+    date: '2014-12-03',
+    views: '3.14k',
+    comments: 3,
+    price: '',
+    badges: [],
+    thumbnail: '/static/picture/9f3a15bda0117252c2dce61f56fc0716470d9a07.png',
+  },
+  {
+    id: 16,
+    title: '亚马逊 Echo：不如播放器专业，没有手机语音方便',
+    excerpt: '对时下热炒的智能硬件别期望太高，这定律相当管用，前不久我们报道过智能衬衫 OMsi...',
+    category: '自定义高度',
+    date: '2014-12-03',
+    views: '2.73k',
+    comments: 1,
+    price: '',
+    badges: [],
+    thumbnail: '/static/picture/d00d4c559a4d612b5e057c4221c98cfb3aef2a37.png',
+  },
+];
+
+/* ========== 标题模式区块 ========== */
+
+/** Grid分类 标题排行榜 */
+export const gridTitleArticles: TitleArticle[] = [
+  { rank: 1, title: '演示付费下载资源样式2', views: '2.76w', href: '#' },
+  { rank: 2, title: '测试资源下载', views: '10w+', href: '#' },
+  { rank: 3, title: '演示免登录付费下载', views: '2.74w', href: '#' },
+  { rank: 4, title: '演示免费资源下载', views: '2.33w', href: '#' },
+  { rank: 5, title: '演示收费观看视频，支持视频列表', views: '2.15w', href: '#' },
+  { rank: 6, title: '演示相册功能', views: '1.77w', href: '#' },
+  { rank: 7, title: '【团购下载】标题可设置显示最多两行', views: '1.11w', href: '#' },
+  { rank: 8, title: '测试文章幻灯片图片', views: '8.1k', href: '#' },
+];
+
+/** List分类 标题排行榜 */
+export const listTitleArticles: TitleArticle[] = [
+  { rank: 1, title: '如果 Skype 过时了，我们现在有 Wire', views: '7.01k', href: '#' },
+  { rank: 2, title: 'Jawbone UP3、UP MOVE 入华，正在接入微信', views: '3.72k', href: '#' },
+  { rank: 3, title: '主打 ID 概念，复制小米模式的华米，估值已经 3 亿美金了', views: '4.87k', href: '#' },
+  { rank: 4, title: '少年可期，Google 要推低龄服务', views: '5.02k', href: '#' },
+  { rank: 5, title: '英特尔：我们的智能眼镜也要拥抱时尚', views: '3.33k', href: '#' },
+  { rank: 6, title: '全面拥抱未来，BMW 所有主力车型都将推混动版', views: '2.84k', href: '#' },
+  { rank: 7, title: '如何用WordPress搭建一个博客网站', views: '2.99k', href: '#' },
+  { rank: 8, title: 'WordPress网站如何提高收录', views: '2.92k', href: '#' },
+];
+
+/** 纯标题分类 标题排行榜 */
+export const pureTitleArticles: TitleArticle[] = [
+  { rank: 1, title: '单栏无边栏文章', views: '1.22w', href: '#' },
+  { rank: 2, title: '特殊显示样式', views: '5.89k', href: '#' },
+  { rank: 3, title: '资源下载wordpress主题，付费下载资源wordpress模板', views: '7.69k', href: '#' },
+  { rank: 4, title: '如果 Skype 过时了，我们现在有 Wire', views: '7.01k', href: '#' },
+  { rank: 5, title: '新一轮预测开启，HTC One （M9）会是什么样子？', views: '2.47k', href: '#' },
+  { rank: 6, title: 'Jawbone UP3、UP MOVE 入华，正在接入微信', views: '3.72k', href: '#' },
+  { rank: 7, title: '霍金想演 007 大反派，那么得先让他能说话', views: '2.44k', href: '#' },
+  { rank: 8, title: 'wordpress如何用openai的chatgpt来做自动批量发文章生成器', views: '3.01k', href: '#' },
+];
+
+/* ========== List 列表区块文章 ========== */
+
+/** List 列表演示文章 */
+export const listArticles: ListArticle[] = [
+  {
+    id: 17,
+    title: '如果 Skype 过时了，我们现在有 Wire',
+    excerpt: '记得早些年学英语的时候，曾经守着 Skype，硬是把一个聊天工具变成了学英语的...',
+    category: 'List分类',
+    date: '2014-12-04',
+    views: '7.01k',
+    comments: 2,
+    badges: [],
+  },
+  {
+    id: 18,
+    title: 'Jawbone UP3、UP MOVE 入华，正在接入微信',
+    excerpt: '刚刚 Jawbone 在北京介绍了他们最新的两款产品 UP3 和 UP MOVE，此时距离全球发布...',
+    category: 'List分类',
+    date: '2014-12-04',
+    views: '3.72k',
+    comments: 2,
+    price: 'VIP',
+    badges: ['VIP'],
+  },
+  {
+    id: 19,
+    title: '主打 ID 概念，复制小米模式的华米，估值已经 3 亿美金了',
+    excerpt: '最早接触华米的时候它还不叫华米，叫智器，主要做 Android 平板电脑，在归入...',
+    category: 'List分类',
+    date: '2014-12-04',
+    views: '4.87k',
+    comments: 4,
+    badges: [],
+  },
+  {
+    id: 20,
+    title: '少年可期，Google 要推低龄服务',
+    excerpt: '为了通往下一个 10 亿用户，Google 花费的心思可不少，一方面瞄向印度、东南亚...',
+    category: 'List分类',
+    date: '2014-12-04',
+    views: '5.02k',
+    comments: 2,
+    badges: [],
+  },
+  {
+    id: 21,
+    title: '英特尔：我们的智能眼镜也要拥抱时尚',
+    excerpt: '就在业界数落 Google Glass 种种不是，面临失败结局的时候，英特尔毅然决然...',
+    category: 'List分类',
+    date: '2014-12-04',
+    views: '3.33k',
+    comments: 1,
+    badges: [],
+  },
+  {
+    id: 22,
+    title: '全面拥抱未来，BMW 所有主力车型都将推混动版',
+    excerpt: '今年 BMW 凭借 i3 和 i8 在新能源汽车行业大放异彩。而这家公司显然不会就此止步。...',
+    category: 'List分类',
+    date: '2014-12-03',
+    views: '2.84k',
+    comments: 1,
+    badges: [],
+  },
+];
+
+/* ========== 教程区块文章 ========== */
+
+/** 教程文章列表（自定义文章类型） */
+export const tutorialArticles: TutorialArticle[] = [
+  {
+    id: 23,
+    title: 'WordPress 自定义分类、标签、页面的URL伪静态格式',
+    date: '2020-03-14',
+    views: '5.84k',
+    comments: 1,
+    thumbnail: '/static/picture/e3871cbe0ef5f109008d30969603f8cbceaf20e1.png',
+    href: '#',
+  },
+  {
+    id: 24,
+    title: 'WordPress 前台自定义登录 开启ssl https时无法进后台需要重新登录',
+    date: '2020-03-14',
+    views: '4.27k',
+    comments: 0,
+    thumbnail: '/static/picture/e3871cbe0ef5f109008d30969603f8cbceaf20e1.png',
+    href: '#',
+  },
+  {
+    id: 25,
+    title: 'WordPress 支持中文用户名注册',
+    date: '2018-12-07',
+    views: '4.81k',
+    comments: 2,
+    thumbnail: '/static/picture/e3871cbe0ef5f109008d30969603f8cbceaf20e1.png',
+    href: '#',
+  },
+  {
+    id: 26,
+    title: 'WordPress 修改后台编辑器上传视频的[video]短代码为video标签',
+    date: '2018-12-07',
+    views: '5.18k',
+    comments: 1,
+    thumbnail: '/static/picture/e3871cbe0ef5f109008d30969603f8cbceaf20e1.png',
+    href: '#',
+  },
+  {
+    id: 27,
+    title: 'WordPress资源下载主题 Modown 使用教程',
+    date: '2018-12-07',
+    views: '8.75k',
+    comments: 0,
+    thumbnail: '/static/picture/e3871cbe0ef5f109008d30969603f8cbceaf20e1.png',
+    href: '#',
+  },
+  {
+    id: 28,
+    title: '如何在WordPress后台的某个页面里添加上传按钮',
+    date: '2018-12-07',
+    views: '3.67k',
+    comments: 0,
+    thumbnail: '/static/picture/e3871cbe0ef5f109008d30969603f8cbceaf20e1.png',
+    href: '#',
+  },
+];
+
+/* ========== 分类轮播标签 ========== */
+
+/** 分类标签轮播数据 */
+export const categoryTabItems = [
+  { name: '未分类', href: '#' },
+  { name: 'Grid分类', href: '#' },
+  { name: '未分类', href: '#' },
+  { name: 'Grid分类', href: '#' },
+  { name: '未分类', href: '#' },
+  { name: 'Grid分类', href: '#' },
+  { name: '未分类', href: '#' },
+  { name: 'Grid分类', href: '#' },
+  { name: '未分类', href: '#' },
+  { name: 'Grid分类', href: '#' },
+];
